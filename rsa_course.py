@@ -50,30 +50,31 @@ Clés générées :
 
 # Section 4: Chiffrement et Déchiffrement RSA
 st.header("4. Chiffrement et Déchiffrement RSA")
-st.write("""
-### Chiffrement :
-L’expéditeur utilise la clé publique (n, e) pour chiffrer un message m :
 
-\[
- c = m^{e} \mod n
-\]
+st.markdown("""
+### Chiffrement
 
-où c est le message chiffré.
+Pour un message $m$, l’expéditeur utilise la clé publique $(n, e)$ :
 
-### Déchiffrement :
-Le destinataire utilise la clé privée (n, d) pour retrouver m :
+$$
+c = m^e \mod n
+$$
 
-\[
- m = c^{d} \mod n
-\]
+où $c$ est le message chiffré.
+
+### Déchiffrement
+
+Le destinataire utilise la clé privée $(n, d)$ pour retrouver $m$ :
+
+$$
+m = c^d \mod n
+$$
 
 D'après le **théorème d'Euler**, nous avons :
 
-\[
- m^{(e \cdot d)} \equiv m \mod n
-\]
-
-Ce résultat garantit la récupération correcte du message initial après le déchiffrement.
+$$
+m^{ed} \equiv m \mod n
+$$
 """)
 
 # Section 5: Sécurité et résistance aux attaques
