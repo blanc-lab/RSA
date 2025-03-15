@@ -36,12 +36,12 @@ def main():
     st.markdown("""
     4. Choisir un entier appelé **exposant de chiffrement** $e$ tel que :
     """)
-    st.latex(r"1 < e < \varphi(n) \quad 	ext{et} \quad \gcd(e, arphi(n)) = 1")
+    st.latex(r"1 < e < \varphi(n) \quad 	ext{et} \quad \gcd(e, \varphi(n)) = 1")
     st.markdown("""
     Fréquemment, on choisit $e = 65537$.
     5. Déterminer l'**exposant de déchiffrement** $d$, tel que :
     """)
-    st.latex(r"e 	imes d \equiv 1 \mod arphi(n)")
+    st.latex(r"e \times d \equiv 1 \mod arphi(n)")
     
     st.header("4) Chiffrement et déchiffrement")
     st.write("Le chiffrement et le déchiffrement suivent ces formules :")
