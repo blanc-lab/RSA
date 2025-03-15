@@ -48,8 +48,8 @@ Clés générées :
 - **Clé privée** : (n, d) → utilisée pour déchiffrer.
 """)
 
-# Section 6: Algorithme d'Euclide Étendu
-st.header("6. Algorithme d'Euclide Étendu")
+# Section 6: Algorithme d'Euclide Étendu et Inverse Modulaire
+st.header("6. Algorithme d'Euclide Étendu et Inverse Modulaire")
 
 st.write("""
 L'algorithme d'Euclide étendu permet de calculer le **plus grand commun diviseur** (pgcd) de deux entiers, tout en trouvant des coefficients entiers \( x \) et \( y \) tels que :
@@ -94,20 +94,26 @@ def euclide_etendu(a, b):
 
 st.write("""
 ---
-### d) Démonstration de l'algorithme d'Euclide étendu :
-L'algorithme repose sur l'identité suivante :
+### d) Lien entre pgcd et inverse modulaire :
+L'inverse modulaire de \( a \) modulo \( m \) est un entier \( x \) tel que :
 
 $$
-\text{pgcd}(a, b) = \text{pgcd}(b, a \mod b)
+a 	imes x \equiv 1 \mod m
 $$
 
-L'idée est d'exprimer \( a \mod b \) en fonction de \( a \) et \( b \) :
+L'algorithme d'Euclide étendu permet de trouver cet inverse si \( 	ext{pgcd}(a, m) = 1 \). En effet, d'après le théorème de Bézout, si \( 	ext{pgcd}(a, m) = 1 \), alors il existe \( x \) et \( y \) tels que :
 
 $$
-a \mod b = a - (a // b) 	imes b
+a 	imes x + m 	imes y = 1
 $$
 
-En remplaçant dans l'équation de Bézout obtenue récursivement, on retrouve les coefficients \( x \) et \( y \) de manière itérative.
+En prenant cette équation **modulo \( m \)**, le terme \( m 	imes y \) disparaît, ce qui donne :
+
+$$
+a 	imes x \equiv 1 \mod m
+$$
+
+Ainsi, \( x \) est l'inverse modulaire de \( a \) modulo \( m \).
 
 ---
 ### e) Exemple avec trace pour \( a = 13 \), \( b = 7 \) :
@@ -133,5 +139,7 @@ $$
 13 \times (-3) + 7 \times 2 = 1
 $$
 
-Cette méthode est essentielle pour la cryptographie, car elle permet de calculer les inverses modulo, indispensables dans les algorithmes comme RSA.
+Donc, l'inverse modulaire de 13 modulo 7 est **4** (car \( -3 \equiv 4 \mod 7 \)).
+
+Cette méthode est essentielle en cryptographie, notamment pour RSA.
 """)
