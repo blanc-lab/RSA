@@ -50,7 +50,7 @@ def main():
     
     st.header("5) Justification mathématique")
     st.write("L'entier $e$ étant premier avec $\varphi(n)$, l'identité de Bézout garantit l'existence de deux entiers $d$ et $k$ tels que :")
-    st.latex(r"e 	imes d + arphi(n) 	imes k = 1")
+    st.latex(r"e \times d + \varphi(n) 	imes k = 1")
     
     st.header("6) Exemple de génération de clés, chiffrement et déchiffrement")
     st.write("Nous allons illustrer le fonctionnement de RSA avec des petits nombres pour simplifier les calculs.")
