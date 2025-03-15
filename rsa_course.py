@@ -66,15 +66,15 @@ où $c$ est le message chiffré.
 
 Le destinataire utilise la clé privée $(n, d)$ pour retrouver $m$ :
 
-$$
+$
 m = c^d \mod n
-$$
+$
 
 D'après le **théorème d'Euler**, nous avons :
 
-$$
+$
 m^{ed} \equiv m \mod n
-$$
+$
 """)
 
 # Section 5: Sécurité et résistance aux attaques
