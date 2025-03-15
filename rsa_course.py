@@ -2,7 +2,7 @@ import streamlit as st
 import random
 
 # Titre et introduction
-st.title("Cours sur l'Algorithme RSA en Cryptographie")
+st.title("Cryptographie ;Cours sur l'Algorithme RSA ")
 st.write("""
 L'algorithme RSA est l'un des systèmes de chiffrement asymétrique les plus utilisés en cryptographie. 
 Il repose sur la difficulté de factoriser de grands nombres et assure la confidentialité et l'authentification des communications.
