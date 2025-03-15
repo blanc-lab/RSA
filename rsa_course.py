@@ -35,27 +35,29 @@ Sa sécurité repose sur la difficulté de factoriser un grand nombre composé d
 st.header("3. Génération des clés RSA")
 st.write("""
 Étapes :
-""")
-st.latex(r"1. \text{Choisir deux grands nombres premiers distincts } p \text{ et } q.")
-st.latex(r"2. \text{Calculer leur produit } n = p \times q.")
-st.latex(r"3. \text{Calculer la fonction d'Euler } \phi(n) = (p-1)(q-1).")
-st.latex(r"4. \text{Choisir un exposant de chiffrement } e, 1 < e < \phi(n), \text{ et } \gcd(e, \phi(n)) = 1.")
-st.latex(r"5. \text{Calculer l'exposant de déchiffrement } d, e \times d \equiv 1 \mod \phi(n).")
+1. Choisir deux grands nombres premiers distincts \( p \) et \( q \).
+2. Calculer leur produit \( n = p \times q \).
+3. Calculer la fonction d'Euler \( \phi(n) = (p-1)(q-1) \).
+4. Choisir un exposant de chiffrement \( e \), \( 1 < e < \phi(n) \), et \( \gcd(e, \phi(n)) = 1 \).
+5. Calculer l'exposant de déchiffrement \( d \), tel que \( e \times d \equiv 1 \mod \phi(n) \).
 
-st.write("Clés générées :")
-st.latex(r"\text{Clé publique } (n, e) \rightarrow \text{ utilisée pour chiffrer.}")
-st.latex(r"\text{Clé privée } (n, d) \rightarrow \text{ utilisée pour déchiffrer.}")
+Clés générées :
+- **Clé publique** : \( (n, e) \) → utilisée pour chiffrer.
+- **Clé privée** : \( (n, d) \) → utilisée pour déchiffrer.
+""")
 
 # Section 4: Chiffrement et Déchiffrement RSA
 st.header("4. Chiffrement et Déchiffrement RSA")
 st.write("""
 Chiffrement :
+\[ c = m^e \mod n \]
+
+Déchiffrement :
+\[ m = c^d \mod n \]
+
+D'après le **théorème d'Euler** :
+\[ m^{ed} \equiv m \mod n \]
 """)
-st.latex(r"c = m^e \mod n")
-st.write("Déchiffrement :")
-st.latex(r"m = c^d \mod n")
-st.write("D'après le **théorème d'Euler** :")
-st.latex(r"m^{ed} \equiv m \mod n")
 
 # Section 5: Sécurité et résistance aux attaques
 st.header("5. Sécurité et résistance aux attaques")
