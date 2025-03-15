@@ -41,7 +41,7 @@ def main():
     Fréquemment, on choisit $e = 65537$.
     5. Déterminer l'**exposant de déchiffrement** $d$, tel que :
     """)
-    st.latex(r"e \times d \equiv 1 \mod arphi(n)")
+    st.latex(r"e \times d \equiv 1 \mod \varphi(n)")
     
     st.header("4) Chiffrement et déchiffrement")
     st.write("Le chiffrement et le déchiffrement suivent ces formules :")
