@@ -56,9 +56,9 @@ st.markdown("""
 
 Pour un message $m$, l’expéditeur utilise la clé publique $(n, e)$ :
 
-$$
+$
 c = m^e \mod n
-$$
+$
 
 où $c$ est le message chiffré.
 
