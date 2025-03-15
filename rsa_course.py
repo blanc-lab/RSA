@@ -49,8 +49,14 @@ def main():
     st.latex(r"M \equiv C^d \mod n")
     
     st.header("5) Justification mathématique")
-    st.write("L'entier $e$ étant premier avec $\varphi(n)$, l'identité de Bézout garantit l'existence de deux entiers $d$ et $k$ tels que :")
-    st.latex(r"e \times d + \varphi(n) 	imes k = 1")
+    st.write("L'entier ")
+    st.latex(r"e")
+    st.write(" étant premier avec ")
+    st.latex(r"\varphi(n)")
+    st.write(", l'identité de Bézout garantit l'existence de deux entiers ")
+    st.latex(r"d, k")
+    st.write(" tels que :")
+    st.latex(r"e \times d + \varphi(n) \times k = 1")
     
     st.header("6) Exemple de génération de clés, chiffrement et déchiffrement")
     st.write("Nous allons illustrer le fonctionnement de RSA avec des petits nombres pour simplifier les calculs.")
