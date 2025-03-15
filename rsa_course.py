@@ -53,16 +53,23 @@ st.header("4. Chiffrement et Déchiffrement RSA")
 st.write("""
 Chiffrement :
 - Pour un message m, l’expéditeur utilise la clé publique (n, e) :
-  c = m^e mod n
+  
+  \[ c = m^e \mod n \]
+  
   où c est le message chiffré.
 
 Déchiffrement :
 - Le destinataire utilise la clé privée (n, d) pour retrouver m :
-  m = c^d mod n
-
-D'après le **théorème d'Euler**, on a :
-  m^(ed) ≡ m mod n
-Ce qui garantit la récupération correcte du message initial.
+  
+  \[ m = c^d \mod n \]
+  
+D'après le **théorème d'Euler**, nous avons :
+  
+  \[
+  m^{ed} \equiv m \mod n
+  \]
+  
+Ce résultat garantit la récupération correcte du message initial après le déchiffrement.
 """)
 
 # Section 5: Sécurité et résistance aux attaques
