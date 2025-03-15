@@ -35,52 +35,58 @@ Sa sécurité repose sur la difficulté de factoriser un grand nombre composé d
 st.header("3. Génération des clés RSA")
 st.write("""
 Étapes :
-1. Choisir deux grands nombres premiers distincts \( p \) et \( q \).
-2. Calculer leur produit \( n = p \times q \).
-3. Calculer la fonction d'Euler \( \phi(n) = (p-1)(q-1) \).
-4. Choisir un exposant de chiffrement \( e \), \( 1 < e < \phi(n) \), et \( \gcd(e, \phi(n)) = 1 \).
-5. Calculer l'exposant de déchiffrement \( d \), tel que \( e \times d \equiv 1 \mod \phi(n) \).
+1. Choisir deux grands nombres premiers distincts p et q.
+2. Calculer leur produit n = p × q.
+3. Calculer la fonction d'Euler : φ(n) = (p - 1)(q - 1).
+4. Choisir un exposant de chiffrement e, tel que :
+   - 1 < e < φ(n) et pgcd(e, φ(n)) = 1.
+   - Un choix fréquent est e = 65537, car il optimise les calculs tout en étant sécurisé.
+5. Calculer l'exposant de déchiffrement d, tel que : e × d ≡ 1 mod φ(n).
 
 Clés générées :
-- **Clé publique** : \( (n, e) \) → utilisée pour chiffrer.
-- **Clé privée** : \( (n, d) \) → utilisée pour déchiffrer.
+- **Clé publique** : (n, e) → utilisée pour chiffrer.
+- **Clé privée** : (n, d) → utilisée pour déchiffrer.
 """)
 
 # Section 4: Chiffrement et Déchiffrement RSA
 st.header("4. Chiffrement et Déchiffrement RSA")
 st.write("""
 Chiffrement :
-\[ c = m^e \mod n \]
+- Pour un message m, l’expéditeur utilise la clé publique (n, e) :
+  c = m^e mod n
+  où c est le message chiffré.
 
 Déchiffrement :
-\[ m = c^d \mod n \]
+- Le destinataire utilise la clé privée (n, d) pour retrouver m :
+  m = c^d mod n
 
-D'après le **théorème d'Euler** :
-\[ m^{ed} \equiv m \mod n \]
+D'après le **théorème d'Euler**, on a :
+  m^(ed) ≡ m mod n
+Ce qui garantit la récupération correcte du message initial.
 """)
 
 # Section 5: Sécurité et résistance aux attaques
 st.header("5. Sécurité et résistance aux attaques")
 st.write("""
 Pourquoi RSA est sécurisé ?
-- **Difficulté de la factorisation** : Retrouver \( p \) et \( q \) à partir de \( n \) est très difficile.
-- **Temps de calcul** : Aucune méthode efficace connue ne permet de factoriser \( n \) en un temps raisonnable pour des clés de 2048 bits ou plus.
+- **Difficulté de la factorisation** : Retrouver p et q à partir de n est très difficile.
+- **Temps de calcul** : Aucune méthode efficace connue ne permet de factoriser n en un temps raisonnable pour des clés de 2048 bits ou plus.
 
 Risques et vulnérabilités :
-- **Mauvais choix de nombres premiers** : Si \( p \) ou \( q \) est composé, la clé est faible.
+- **Mauvais choix de nombres premiers** : Si p ou q est composé, la clé est faible.
 - **Attaques possibles** :
-  - **Attaque par factorisation** : Si \( n \) est trop petit, il peut être factorisé avec des algorithmes modernes.
+  - **Attaque par factorisation** : Si n est trop petit, il peut être factorisé avec des algorithmes modernes.
   - **Attaque quantique** : L’algorithme de Shor pourrait casser RSA avec un ordinateur quantique suffisamment puissant.
 """)
 
 # Section 6: Algorithme d'Euclide Étendu
 st.header("6. Algorithme d'Euclide Étendu")
 st.write("""
-L'algorithme d’Euclide étendu est utilisé pour trouver l'inverse modulaire \( d \).
+L'algorithme d’Euclide étendu est utilisé pour trouver l'inverse modulaire d.
 
-Il permet de résoudre \( ax + by = \text{PGCD}(a, b) \).
+Il permet de résoudre ax + by = pgcd(a, b).
 
-Si \( a \) et \( b \) sont premiers entre eux, alors \( x \) est l'inverse modulaire de \( a \) modulo \( b \).
+Si a et b sont premiers entre eux, alors x est l'inverse modulaire de a modulo b.
 """)
 st.code("""
 def euclide_etendu(a, b):
