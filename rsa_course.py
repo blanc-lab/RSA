@@ -26,45 +26,51 @@ def main():
     st.header("3) Génération des clés")
     st.markdown("""
     1. Choisir deux grands nombres premiers distincts $p$ et $q$.
-    2. Calculer leur produit : $n = p \times q$
-    3. Calculer l'indicatrice d'Euler de $n$ : $\varphi(n) = (p - 1)(q - 1)$
-    4. Choisir un entier appelé **exposant de chiffrement** $e$ tel que :
-       $$ 1 < e < \varphi(n) \quad \text{et} \quad \gcd(e, \varphi(n)) = 1 $$
-       Fréquemment, on choisit $e = 65537$.
-    5. Déterminer l'**exposant de déchiffrement** $d$, tel que :
-       $$ e \times d \equiv 1 \mod \varphi(n) $$
+    2. Calculer leur produit :
     """)
+    st.latex(r"n = p 	imes q")
+    st.markdown("""
+    3. Calculer l'indicatrice d'Euler de $n$ :
+    """)
+    st.latex(r"\varphi(n) = (p - 1)(q - 1)")
+    st.markdown("""
+    4. Choisir un entier appelé **exposant de chiffrement** $e$ tel que :
+    """)
+    st.latex(r"1 < e < \varphi(n) \quad 	ext{et} \quad \gcd(e, arphi(n)) = 1")
+    st.markdown("""
+    Fréquemment, on choisit $e = 65537$.
+    5. Déterminer l'**exposant de déchiffrement** $d$, tel que :
+    """)
+    st.latex(r"e 	imes d \equiv 1 \mod arphi(n)")
     
     st.header("4) Chiffrement et déchiffrement")
     st.write("Le chiffrement et le déchiffrement suivent ces formules :")
-    st.markdown("$$ C \equiv M^e \mod n $$")
-    st.markdown("$$ M \equiv C^d \mod n $$")
+    st.latex(r"C \equiv M^e \mod n")
+    st.latex(r"M \equiv C^d \mod n")
     
     st.header("5) Justification mathématique")
-    st.markdown("""
-    L'entier $e$ étant premier avec $\varphi(n)$, l'identité de Bézout garantit l'existence de deux entiers $d$ et $k$ tels que :
-    $$ e \times d + \varphi(n) \times k = 1 $$
-    """)
+    st.write("L'entier $e$ étant premier avec $\varphi(n)$, l'identité de Bézout garantit l'existence de deux entiers $d$ et $k$ tels que :")
+    st.latex(r"e 	imes d + arphi(n) 	imes k = 1")
     
     st.header("6) Exemple de génération de clés, chiffrement et déchiffrement")
     st.write("Nous allons illustrer le fonctionnement de RSA avec des petits nombres pour simplifier les calculs.")
     
     st.subheader("6.1 Génération des clés")
-    st.markdown("$$ p = 3, \quad q = 11 $$")
-    st.markdown("$$ n = p \times q = 3 \times 11 = 33 $$")
-    st.markdown("$$ \varphi(n) = (3 - 1) \times (11 - 1) = 2 \times 10 = 20 $$")
-    st.markdown("$$ e = 3 $$")
-    st.markdown("$$ d = 7 $$")
+    st.latex(r"p = 3, \quad q = 11")
+    st.latex(r"n = p 	imes q = 3 	imes 11 = 33")
+    st.latex(r"\varphi(n) = (3 - 1) 	imes (11 - 1) = 2 	imes 10 = 20")
+    st.latex(r"e = 3")
+    st.latex(r"d = 7")
     
     st.subheader("6.2 Chiffrement")
     st.write("Bob veut envoyer le message $M = 4$ à Alice. Il chiffre le message avec la clé publique :")
-    st.markdown("$$ C = M^e \mod n $$")
-    st.markdown("$$ C = 4^3 \mod 33 = 31 $$")
+    st.latex(r"C = M^e \mod n")
+    st.latex(r"C = 4^3 \mod 33 = 31")
     
     st.subheader("6.3 Déchiffrement")
     st.write("Alice reçoit $C = 31$ et le déchiffre avec sa clé privée :")
-    st.markdown("$$ M' = C^d \mod n $$")
-    st.markdown("$$ M' = 31^7 \mod 33 = 4 $$")
+    st.latex(r"M' = C^d \mod n")
+    st.latex(r"M' = 31^7 \mod 33 = 4")
     
     st.subheader("6.4 Conclusion")
     st.write("Cet exemple illustre bien le fonctionnement de RSA, même si en pratique on utilise des nombres bien plus grands pour garantir la sécurité.")
