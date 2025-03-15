@@ -48,76 +48,39 @@ Clés générées :
 - **Clé privée** : (n, d) → utilisée pour déchiffrer.
 """)
 
-# Section 4: Chiffrement et Déchiffrement RSA
-st.header("4. Chiffrement et Déchiffrement RSA")
-st.markdown("""
-### Chiffrement
-
-Pour un message $m$, l’expéditeur utilise la clé publique $(n, e)$ :
-
-$$
-c = m^e \mod n
-$$
-
-où $c$ est le message chiffré.
-
-### Déchiffrement
-
-Le destinataire utilise la clé privée $(n, d)$ pour retrouver $m$ :
-
-$$
-m = c^d \mod n
-$$
-
-D'après le **théorème d'Euler**, nous avons :
-
-$$
-m^{ed} \equiv m \mod n
-$$
-""")
-
-# Section 5: Sécurité et résistance aux attaques
-st.header("5. Sécurité et résistance aux attaques")
-st.write("""
-Pourquoi RSA est sécurisé ?
-- **Difficulté de la factorisation** : Retrouver p et q à partir de n est très difficile.
-- **Temps de calcul** : Aucune méthode efficace connue ne permet de factoriser n en un temps raisonnable pour des clés de 2048 bits ou plus.
-
-Risques et vulnérabilités :
-- **Mauvais choix de nombres premiers** : Si p ou q est composé, la clé est faible.
-- **Attaques possibles** :
-  - **Attaque par factorisation** : Si n est trop petit, il peut être factorisé avec des algorithmes modernes.
-  - **Attaque quantique** : L’algorithme de Shor pourrait casser RSA avec un ordinateur quantique suffisamment puissant.
-""")
-
 # Section 6: Algorithme d'Euclide Étendu
 st.header("6. Algorithme d'Euclide Étendu")
+
 st.write("""
-L'algorithme d’Euclide étendu est utilisé pour trouver l'inverse modulaire d.
+L'algorithme d'Euclide étendu permet de calculer le **plus grand commun diviseur** (pgcd) de deux entiers, tout en trouvant des coefficients entiers \( x \) et \( y \) tels que :
 
-Il permet de résoudre ax + by = pgcd(a, b).
+$$
+\text{pgcd}(a, b) = ax + by
+$$
 
-Si a et b sont premiers entre eux, alors x est l'inverse modulaire de a modulo b.
+Cette relation est connue sous le nom **d'identité de Bézout**, et les entiers \( x \) et \( y \) sont appelés **coefficients de Bézout**.
 
+---
 ### a) Théorème de Bézout :
-Soient $a$ et $b$ deux entiers relatifs non nuls. Il existe deux entiers $x$ et $y$, appelés coefficients de Bézout, tels que :
+Soient \( a \) et \( b \) deux entiers relatifs non nuls. Il existe toujours deux entiers \( x \) et \( y \) vérifiant l'équation :
 
 $$
 \text{pgcd}(a,b) = ax + by
 $$
 
-où $\text{pgcd}(a,b)$ désigne le plus grand commun diviseur de $a$ et $b$.
-
+---
 ### b) Propriété clé de l'algorithme d'Euclide :
-L'algorithme d'Euclide repose sur la propriété fondamentale suivante :
+L'algorithme d'Euclide repose sur la propriété suivante :
 
 $$
 \text{pgcd}(a,b) = \text{pgcd}(b, a \mod b)
 $$
 
-pour tous entiers $a$ et $b$ avec $b \neq 0$.
+Ce qui signifie que le pgcd de deux nombres ne change pas si l'on remplace \( a \) par son reste dans la division euclidienne de \( a \) par \( b \). Cette propriété permet une **réduction rapide** de la taille des nombres à chaque itération.
 
+---
 ### c) Code de l'algorithme d'Euclide étendu :
+Le code suivant implémente l'algorithme d'Euclide étendu en Python :
 """)
 
 st.code("""
@@ -130,56 +93,45 @@ def euclide_etendu(a, b):
 """)
 
 st.write("""
+---
 ### d) Démonstration de l'algorithme d'Euclide étendu :
-L'algorithme d'Euclide étendu repose sur le principe de l'algorithme d'Euclide classique. Il permet de retrouver les coefficients de Bézout en remontant dans la récursion en utilisant l'identité :
+L'algorithme repose sur l'identité suivante :
 
 $$
 \text{pgcd}(a, b) = \text{pgcd}(b, a \mod b)
 $$
 
-À chaque étape, on exprime $\text{pgcd}(a, b)$ sous la forme d'une combinaison linéaire de $a$ et $b$ en utilisant la division euclidienne.
-""")
+L'idée est d'exprimer \( a \mod b \) en fonction de \( a \) et \( b \) :
 
-st.write("""
-### e) Exemple avec trace pour $a = 13$, $b = 7$ :
+$$
+a \mod b = a - (a // b) 	imes b
+$$
 
-| Étape | $a$ | $b$ | $a \mod b$ | $x$ | $y$ |
+En remplaçant dans l'équation de Bézout obtenue récursivement, on retrouve les coefficients \( x \) et \( y \) de manière itérative.
+
+---
+### e) Exemple avec trace pour \( a = 13 \), \( b = 7 \) :
+
+Voici la trace des appels récursifs de l'algorithme d'Euclide étendu :
+
+| Étape | \( a \) | \( b \) | \( a \mod b \) | \( x \) | \( y \) |
 |-------|----|----|---------|----|----|
 | 1 | 13 | 7 | 6 | 1 | 0 |
 | 2 | 7 | 6 | 1 | 0 | 1 |
 | 3 | 6 | 1 | 0 | 1 | -1 |
 | 4 | 1 | 0 | - | -1 | 2 |
 
-Résultat : $\text{pgcd}(13,7) = 1$, coefficients de Bézout : $x = -3$, $y = 2$.
-""")
-# Section 7: Test de primalité de Miller-Rabin
-st.header("7. Test de primalité de Miller-Rabin")
-st.write("""
-Le test de Miller-Rabin est un algorithme probabiliste utilisé pour tester si un nombre est premier.
+Finalement, nous obtenons :
 
-Principe :
-1. Écrire \( n - 1 = 2^s 	imes d \).
-2. Tester des bases aléatoires \( a \) :
-   - \( x = a^d \mod n \).
-3. Si aucun des tests ne réussit, alors \( n \) est composé.
-""")
+$$
+\text{pgcd}(13,7) = 1, \quad x = -3, \quad y = 2
+$$
 
-# Section 8: Exponentiation Modulaire Rapide
-st.header("8. Exponentiation Modulaire Rapide")
-st.write("""
-RSA implique des puissances très grandes, nécessitant une méthode efficace pour \( m^e \mod n \).
+Ce qui signifie que :
 
-L'algorithme de **Square and Multiply** optimise l'exponentiation modulaire.
-""")
+$$
+13 \times (-3) + 7 \times 2 = 1
+$$
 
-# Section 9: Conclusion
-st.header("9. Conclusion")
-st.write("""
-- **RSA** repose sur la difficulté de factoriser de grands nombres.
-- La **génération de clés** nécessite des tests de primalité robustes.
-- L’**exponentiation modulaire rapide** optimise les calculs.
-- **RSA est sécurisé** contre les attaques classiques, mais vulnérable aux attaques quantiques.
-
-### Perspectives :
-Des alternatives comme les **courbes elliptiques** et la **cryptographie post-quantique** sont en développement.
+Cette méthode est essentielle pour la cryptographie, car elle permet de calculer les inverses modulo, indispensables dans les algorithmes comme RSA.
 """)
