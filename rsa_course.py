@@ -50,15 +50,14 @@ Clés générées :
 
 # Section 4: Chiffrement et Déchiffrement RSA
 st.header("4. Chiffrement et Déchiffrement RSA")
-
 st.markdown("""
 ### Chiffrement
 
 Pour un message $m$, l’expéditeur utilise la clé publique $(n, e)$ :
 
-$
+$$
 c = m^e \mod n
-$
+$$
 
 où $c$ est le message chiffré.
 
@@ -66,15 +65,15 @@ où $c$ est le message chiffré.
 
 Le destinataire utilise la clé privée $(n, d)$ pour retrouver $m$ :
 
-$
+$$
 m = c^d \mod n
-$
+$$
 
 D'après le **théorème d'Euler**, nous avons :
 
-$
+$$
 m^{ed} \equiv m \mod n
-$
+$$
 """)
 
 # Section 5: Sécurité et résistance aux attaques
@@ -107,6 +106,26 @@ def euclide_etendu(a, b):
     else:
         g, x, y = euclide_etendu(b, a % b)
         return g, y, x - (a // b) * y
+""")
+
+# Section 7: Test de primalité de Miller-Rabin
+st.header("7. Test de primalité de Miller-Rabin")
+st.write("""
+Le test de Miller-Rabin est un algorithme probabiliste utilisé pour tester si un nombre est premier.
+
+Principe :
+1. Écrire \( n - 1 = 2^s 	imes d \).
+2. Tester des bases aléatoires \( a \) :
+   - \( x = a^d \mod n \).
+3. Si aucun des tests ne réussit, alors \( n \) est composé.
+""")
+
+# Section 8: Exponentiation Modulaire Rapide
+st.header("8. Exponentiation Modulaire Rapide")
+st.write("""
+RSA implique des puissances très grandes, nécessitant une méthode efficace pour \( m^e \mod n \).
+
+L'algorithme de **Square and Multiply** optimise l'exponentiation modulaire.
 """)
 
 # Section 9: Conclusion
