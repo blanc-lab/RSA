@@ -98,7 +98,28 @@ L'algorithme d’Euclide étendu est utilisé pour trouver l'inverse modulaire d
 Il permet de résoudre ax + by = pgcd(a, b).
 
 Si a et b sont premiers entre eux, alors x est l'inverse modulaire de a modulo b.
+
+### a) Théorème de Bézout :
+Soient $a$ et $b$ deux entiers relatifs non nuls. Il existe deux entiers $x$ et $y$, appelés coefficients de Bézout, tels que :
+
+$$
+\text{pgcd}(a,b) = ax + by
+$$
+
+où $\text{pgcd}(a,b)$ désigne le plus grand commun diviseur de $a$ et $b$.
+
+### b) Propriété clé de l'algorithme d'Euclide :
+L'algorithme d'Euclide repose sur la propriété fondamentale suivante :
+
+$$
+\text{pgcd}(a,b) = \text{pgcd}(b, a \mod b)
+$$
+
+pour tous entiers $a$ et $b$ avec $b \neq 0$.
+
+### c) Code de l'algorithme d'Euclide étendu :
 """)
+
 st.code("""
 def euclide_etendu(a, b):
     if b == 0:
@@ -108,6 +129,29 @@ def euclide_etendu(a, b):
         return g, y, x - (a // b) * y
 """)
 
+st.write("""
+### d) Démonstration de l'algorithme d'Euclide étendu :
+L'algorithme d'Euclide étendu repose sur le principe de l'algorithme d'Euclide classique. Il permet de retrouver les coefficients de Bézout en remontant dans la récursion en utilisant l'identité :
+
+$$
+\text{pgcd}(a, b) = \text{pgcd}(b, a \mod b)
+$$
+
+À chaque étape, on exprime $\text{pgcd}(a, b)$ sous la forme d'une combinaison linéaire de $a$ et $b$ en utilisant la division euclidienne.
+""")
+
+st.write("""
+### e) Exemple avec trace pour $a = 13$, $b = 7$ :
+
+| Étape | $a$ | $b$ | $a \mod b$ | $x$ | $y$ |
+|-------|----|----|---------|----|----|
+| 1 | 13 | 7 | 6 | 1 | 0 |
+| 2 | 7 | 6 | 1 | 0 | 1 |
+| 3 | 6 | 1 | 0 | 1 | -1 |
+| 4 | 1 | 0 | - | -1 | 2 |
+
+Résultat : $\text{pgcd}(13,7) = 1$, coefficients de Bézout : $x = -3$, $y = 2$.
+""")
 # Section 7: Test de primalité de Miller-Rabin
 st.header("7. Test de primalité de Miller-Rabin")
 st.write("""
