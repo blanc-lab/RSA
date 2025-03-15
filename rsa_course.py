@@ -2,7 +2,7 @@ import streamlit as st
 import random
 
 # Titre et introduction
-st.title("Cryptographie ;Cours sur l'Algorithme RSA ")
+st.title("Cryptographie : cours sur l'Algorithme RSA")
 st.write("""
 L'algorithme RSA est l'un des systèmes de chiffrement asymétrique les plus utilisés en cryptographie. 
 Il repose sur la difficulté de factoriser de grands nombres et assure la confidentialité et l'authentification des communications.
@@ -35,37 +35,27 @@ Sa sécurité repose sur la difficulté de factoriser un grand nombre composé d
 st.header("3. Génération des clés RSA")
 st.write("""
 Étapes :
-1. Choisir deux grands nombres premiers distincts \( p \) et \( q \).
-2. Calculer leur produit \( n = p \times q \) (modulus).
-3. Calculer la fonction d'Euler : \( \phi(n) = (p-1)(q-1) \).
-4. Choisir un exposant de chiffrement \( e \), tel que :
-   - \( 1 < e < \phi(n) \) et \( \text{PGCD}(e, \phi(n)) = 1 \).
-   - Un choix fréquent est \( e = 65537 \), car il optimise les calculs tout en étant sécurisé.
-5. Calculer l'exposant de déchiffrement \( d \), tel que : \( e \times d \equiv 1 \mod \phi(n) \).
-   
-Clés générées :
-- **Clé publique** : \( (n, e) \) → utilisée pour chiffrer.
-- **Clé privée** : \( (n, d) \) → utilisée pour déchiffrer.
 """)
+st.latex(r"1. \text{Choisir deux grands nombres premiers distincts } p \text{ et } q.")
+st.latex(r"2. \text{Calculer leur produit } n = p \times q.")
+st.latex(r"3. \text{Calculer la fonction d'Euler } \phi(n) = (p-1)(q-1).")
+st.latex(r"4. \text{Choisir un exposant de chiffrement } e, 1 < e < \phi(n), \text{ et } \gcd(e, \phi(n)) = 1.")
+st.latex(r"5. \text{Calculer l'exposant de déchiffrement } d, e \times d \equiv 1 \mod \phi(n).")
+
+st.write("Clés générées :")
+st.latex(r"\text{Clé publique } (n, e) \rightarrow \text{ utilisée pour chiffrer.}")
+st.latex(r"\text{Clé privée } (n, d) \rightarrow \text{ utilisée pour déchiffrer.}")
 
 # Section 4: Chiffrement et Déchiffrement RSA
 st.header("4. Chiffrement et Déchiffrement RSA")
 st.write("""
 Chiffrement :
-- Pour un message \( m \), l’expéditeur utilise la clé publique \( (n, e) \) :
-  \[ c = m^e \mod n \]
-  où \( c \) est le message chiffré.
-
-Déchiffrement :
-- Le destinataire utilise la clé privée \( (n, d) \) pour retrouver \( m \) :
-  \[ m = c^d \mod n \]
-  
-D'après le **théorème d'Euler**, on a :
-\[
-m^{ed} \equiv m \mod n
-\]
-Ce qui garantit la récupération correcte du message initial.
 """)
+st.latex(r"c = m^e \mod n")
+st.write("Déchiffrement :")
+st.latex(r"m = c^d \mod n")
+st.write("D'après le **théorème d'Euler** :")
+st.latex(r"m^{ed} \equiv m \mod n")
 
 # Section 5: Sécurité et résistance aux attaques
 st.header("5. Sécurité et résistance aux attaques")
@@ -90,8 +80,6 @@ Il permet de résoudre \( ax + by = \text{PGCD}(a, b) \).
 
 Si \( a \) et \( b \) sont premiers entre eux, alors \( x \) est l'inverse modulaire de \( a \) modulo \( b \).
 """)
-
-st.subheader("Implémentation de l'algorithme d'Euclide Étendu en Python")
 st.code("""
 def euclide_etendu(a, b):
     if b == 0:
@@ -99,65 +87,6 @@ def euclide_etendu(a, b):
     else:
         g, x, y = euclide_etendu(b, a % b)
         return g, y, x - (a // b) * y
-""")
-
-# Section 7: Test de primalité de Miller-Rabin
-st.header("7. Test de primalité de Miller-Rabin")
-st.write("""
-Le test de Miller-Rabin est un algorithme probabiliste utilisé pour tester si un nombre est premier.
-
-Principe :
-1. Écrire \( n - 1 = 2^s \times d \).
-2. Tester des bases aléatoires \( a \) :
-   - \( x = a^d \mod n \).
-3. Si aucun des tests ne réussit, alors \( n \) est composé.
-""")
-
-st.subheader("Implémentation du test de Miller-Rabin en Python")
-st.code("""
-import random
-
-def est_probablement_premier(n, k=10):
-    if n < 2 or n % 2 == 0:
-        return False
-    s, d = 0, n - 1
-    while d % 2 == 0:
-        d //= 2
-        s += 1
-
-    for _ in range(k):
-        a = random.randint(2, n - 2)
-        x = pow(a, d, n)
-        if x == 1 or x == n - 1:
-            continue
-        for _ in range(s - 1):
-            x = pow(x, 2, n)
-            if x == n - 1:
-                break
-        else:
-            return False
-    return True
-""")
-
-# Section 8: Exponentiation Modulaire Rapide
-st.header("8. Exponentiation Modulaire Rapide")
-st.write("""
-RSA implique des puissances très grandes, nécessitant une méthode efficace pour \( m^e \mod n \).
-
-L'algorithme de **Square and Multiply** optimise l'exponentiation modulaire.
-""")
-
-st.subheader("Implémentation de l'exponentiation modulaire rapide en Python")
-st.code("""
-def exp_mod(base, exponent, modulus):
-    result = 1
-    base = base % modulus
-    while exponent > 0:
-        if exponent % 2 == 1:
-            result = (result * base) % modulus
-        base = (base * base) % modulus
-        exponent //= 2
-    return result
 """)
 
 # Section 9: Conclusion
